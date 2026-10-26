@@ -101,11 +101,36 @@ def generate_data(scale="small"):
         )
 
         # 4. Material lots
+        # Guarantee at least one lot for every material required by the BOM.
         lots = []
-        for i in range(1, lot_count + 1):
+        required_materials = sorted({
+            row[1] for row in bom_rows
+        })
+
+        for index, material_name in enumerate(required_materials):
+            supplier_id = suppliers[index % supplier_count][0]
+            received_date = today - timedelta(
+                days=rng.randint(1, 250)
+            )
+
+            lots.append(
+                (
+                    f"LOT-{supplier_id}-2026-{index + 1:06d}",
+                    supplier_id,
+                    material_name,
+                    10000.0,
+                    received_date.isoformat(),
+                    "AVAILABLE",
+                )
+            )
+
+        # Add more lots for realistic dataset volume.
+        for i in range(len(lots) + 1, lot_count + 1):
             supplier_id = suppliers[(i - 1) % supplier_count][0]
             material_name = f"MATERIAL-{rng.randint(1, 30):03d}"
-            received_date = today - timedelta(days=rng.randint(1, 250))
+            received_date = today - timedelta(
+                days=rng.randint(1, 250)
+            )
 
             lots.append(
                 (
@@ -170,6 +195,11 @@ def generate_data(scale="small"):
         defect_rows = []
         capa_rows = []
         event_rows = []
+            
+        remaining_by_lot = {
+            lot[0]: float(lot[3])
+            for lot in lots
+        }
 
         for i in range(1, order_count + 1):
             product = products[(i - 1) % product_count]
@@ -194,14 +224,38 @@ def generate_data(scale="small"):
             )
 
             # Link one real material lot to this order.
-            lot = lots[(i - 1) % lot_count]
+                       # Select a lot matching this product's required BOM material.
+            required_material = next(
+                row[1] for row in bom_rows
+                if row[0] == product_id
+            )
+
+            matching_lots = [
+                lot for lot in lots
+                if lot[2] == required_material
+                and remaining_by_lot[lot[0]] >= 10
+            ]
+
+            if not matching_lots:
+                raise ValueError(
+                    f"No sufficient lot found for BOM material "
+                    f"{required_material} in order {order_id}."
+                )
+
+            lot = matching_lots[(i - 1) % len(matching_lots)]
             lot_id = lot[0]
-            quantity_used = float(rng.randint(10, 50))
+
+            available_quantity = remaining_by_lot[lot_id]
+            quantity_used = float(
+                rng.randint(10, min(50, int(available_quantity)))
+            )
+
+            remaining_by_lot[lot_id] -= quantity_used
 
             consumption_rows.append(
                 (order_id, lot_id, quantity_used)
             )
-
+            
             # A process step records the machine used by the order.
             machine = machines[(i - 1) % len(machines)]
             step_id = f"STEP-{i:06d}"

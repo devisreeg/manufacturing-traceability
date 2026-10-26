@@ -1,0 +1,6 @@
+case_id,issue_type,description,expected_decision
+GT-001,NONEXISTENT_LOT,Defect references a material lot that does not exist,REJECT
+GT-002,BOM_MATERIAL_NOT_CONSUMED,A required BOM material is missing from production consumption,FLAG
+GT-003,CAPA_CLOSED_BEFORE_VERIFICATION,Corrective action is closed without successful verification,REJECT
+GT-004,DEFECTS_EXCEED_INSPECTED,Recorded defect quantity exceeds inspected quantity,REJECT
+GT-005,BROKEN_TRACEABILITY_CHAIN,Defect cannot be traced through the required production chain,FLAG
