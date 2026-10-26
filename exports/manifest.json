@@ -1,0 +1,83 @@
+{
+  "project": "Manufacturing Defect Traceability and CAPA System",
+  "scale": "full",
+  "seed": 20261022,
+  "exported_at_utc": "2026-10-26T18:29:58.239975+00:00",
+  "record_counts": {
+    "products": 200,
+    "suppliers": 50,
+    "bom": 200,
+    "material_lots": 2000,
+    "machines": 10,
+    "production_orders": 5000,
+    "order_material_consumption": 5000,
+    "process_steps": 5000,
+    "inspection_plans": 200,
+    "inspection_results": 20000,
+    "defects": 4001,
+    "corrective_actions": 4001,
+    "event_history": 5000
+  },
+  "files": {
+    "csv\\bom.csv": {
+      "size_bytes": 9069,
+      "sha256": "e8b052bacd4fad52d5611d86f3491016926ba3f7dfbb2a39dbdd19e8bfbe6f38"
+    },
+    "csv\\corrective_actions.csv": {
+      "size_bytes": 404148,
+      "sha256": "77d3021ac01d164d47e68f350f82729fe66b9b8d48ff2ecf77e358d8d7d598e2"
+    },
+    "csv\\defects.csv": {
+      "size_bytes": 494732,
+      "sha256": "fd00ce09ff7578fc2ffc04366ba11088cefdb90eb0d89641f20a4299c3f777c8"
+    },
+    "csv\\event_history.csv": {
+      "size_bytes": 418457,
+      "sha256": "98ccdf62d2c31cca81d61b0138edba82cd1880e6b258fb628053e950a4d1a70f"
+    },
+    "csv\\inspection_plans.csv": {
+      "size_bytes": 10862,
+      "sha256": "fc8340887795f90d3528c128d0b123ae4b62dcb086c967cbda7bfab2ab2acc53"
+    },
+    "csv\\inspection_results.csv": {
+      "size_bytes": 1280090,
+      "sha256": "60d7397c179173ed9cee787df107d0a648a17f0b88b623dc27eaddf63d1256da"
+    },
+    "csv\\machines.csv": {
+      "size_bytes": 415,
+      "sha256": "2082c4360b8be230aa35486f734668df1fc5e4d5c80285476b861afb145b6b23"
+    },
+    "csv\\material_lots.csv": {
+      "size_bytes": 150141,
+      "sha256": "c3ba344fb99692db8aeb7d33c02f86d19de7ffd61f85a824ac2e5edda0788790"
+    },
+    "csv\\order_material_consumption.csv": {
+      "size_bytes": 260049,
+      "sha256": "d39bdcf4ee3a0844b3aef6dec5e3aee352f2ffe14d19832e78d9819f2c058fcc"
+    },
+    "csv\\process_steps.csv": {
+      "size_bytes": 385069,
+      "sha256": "9ce61dc639be193e3fc3e66e8c670ee8114a1e2cbfa02a6e1299619a9e8c2d8d"
+    },
+    "csv\\production_orders.csv": {
+      "size_bytes": 331858,
+      "sha256": "66c241b1715926f319fb6c4707856fe34f48ab2c3d0d589c22ef13dcfe0470d7"
+    },
+    "csv\\products.csv": {
+      "size_bytes": 11920,
+      "sha256": "15531074ffaf175f824ac59743789f2847e4eaebb7318e51e9165d419d4d5471"
+    },
+    "csv\\suppliers.csv": {
+      "size_bytes": 1537,
+      "sha256": "bd110a1513e77908f646cb97130d92357572e03fa35031a6d8f72b74624fd68b"
+    },
+    "manufacturing_export.json": {
+      "size_bytes": 13475482,
+      "sha256": "68ddb810e14b042a7604de10578aab563caa8a33a14e46aa391c676d312e4ddf"
+    },
+    "manufacturing_export.sql": {
+      "size_bytes": 6314363,
+      "sha256": "254ed700b8a184f02e3010dd26de97c02d67f6b5e7c9e45f1bc056d0c438bcee"
+    }
+  }
+}

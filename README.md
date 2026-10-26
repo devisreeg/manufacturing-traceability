@@ -176,3 +176,13 @@ Refer to `schemas/data_dictionary.md` for the documented data definitions.
 **Devisree G**
 
 GitHub: [@devisreeg](https://github.com/devisreeg)
+
+## Export Data
+
+Export the full dataset with `python -m app.exports --scale full`. The export includes CSV files for 13 tables, a JSON export, an SQL dump, and a manifest containing record counts and SHA-256 checksums.
+
+The current full dataset contains 50,662 records across 13 tables.
+
+## Ground Truth and AI Usage
+
+See `data/ground_truth.csv` for expected anomaly decisions, `docs/AI_USAGE.md` for AI usage disclosures, and `docs/prompt_history/README.md` for prompt-history notes. This is a demonstration system using synthetic data.
