@@ -21,7 +21,7 @@ def load_table(query):
 
 
 def main():
-    st.title("🏭 Manufacturing Traceability & Quality Dashboard")
+    st.title("Manufacturing Traceability & Quality Dashboard")
     st.caption(
         "Monitor production, investigate defects, "
         "and track corrective and preventive actions."
@@ -30,7 +30,7 @@ def main():
     # Load the calculated metrics
     metrics = calculate_metrics()
 
-    st.header("📊 Production Overview")
+    st.header("Production Overview")
 
     col1, col2, col3, col4 = st.columns(4)
 
@@ -41,7 +41,7 @@ def main():
 
     st.divider()
 
-    st.header("🔍 Quality Overview")
+    st.header("Quality Overview")
 
     col1, col2, col3, col4 = st.columns(4)
 
@@ -78,7 +78,7 @@ def main():
 
     # CAPA overview
     st.divider()
-    st.header("🛠️ Corrective and Preventive Actions (CAPA)")
+    st.header("Corrective and Preventive Actions (CAPA)")
 
     capa_col1, capa_col2, capa_col3, capa_col4 = st.columns(4)
 
@@ -109,7 +109,7 @@ def main():
 
     # Defect traceability
     st.divider()
-    st.header("🔎 Defect Traceability")
+    st.header("Defect Traceability")
 
     defects = get_defect_traceability()
 
@@ -176,12 +176,23 @@ def main():
                 st.write(f"Process Step: {record['step_name']}")
                 st.write(f"Machine: {record['machine_name']}")
 
+            with st.expander("Corrective Action (CAPA) Details", expanded=True):
+                st.write(f"CAPA ID: {record['capa_id']}")
+                st.write(f"Action: {record['action_description']}")
+                st.write(f"Status: {record['capa_status']}")
+                st.write(f"Opened At: {record['capa_opened_at']}")
+                st.write(f"Closed At: {record['capa_closed_at']}")
+                st.write(
+                    f"Verification Result: "
+                    f"{record['verification_result'] or 'Not verified'}"
+                )
+
     else:
         st.info("No defect records found.")
 
     # Supplier analysis
     st.divider()
-    st.header("🏭 Supplier Quality Analysis")
+    st.header("Supplier Quality Analysis")
 
     try:
         supplier_df = load_table("""
@@ -212,7 +223,7 @@ def main():
 
     # Machine analysis
     st.divider()
-    st.header("⚙️ Machine Quality Analysis")
+    st.header("Machine Quality Analysis")
 
     try:
         machine_df = load_table("""

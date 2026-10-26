@@ -25,7 +25,13 @@ def get_defect_traceability(defect_id=None):
             ps.step_id,
             ps.step_name,
             m.machine_id,
-            m.machine_name
+            m.machine_name,
+            ca.capa_id,
+            ca.action_description,
+            ca.status AS capa_status,
+            ca.opened_at AS capa_opened_at,
+            ca.closed_at AS capa_closed_at,
+            ca.verification_result
         FROM defects d
         JOIN inspection_results i
             ON d.inspection_id = i.inspection_id
@@ -41,6 +47,8 @@ def get_defect_traceability(defect_id=None):
             ON d.step_id = ps.step_id
         LEFT JOIN machines m
             ON ps.machine_id = m.machine_id
+        LEFT JOIN corrective_actions ca
+            ON d.defect_id = ca.defect_id
     """
 
     parameters = ()
@@ -95,6 +103,13 @@ def print_defect_traceability(defect_id=None):
         print(f"Process Step    : {record['step_name']}")
         print(f"Machine ID      : {record['machine_id']}")
         print(f"Machine Name    : {record['machine_name']}")
+        print("\n--- Corrective Action (CAPA) ---")
+        print(f"CAPA ID         : {record['capa_id']}")
+        print(f"Action          : {record['action_description']}")
+        print(f"Status          : {record['capa_status']}")
+        print(f"Opened At       : {record['capa_opened_at']}")
+        print(f"Closed At       : {record['capa_closed_at']}")
+        print(f"Verification    : {record['verification_result']}")
 
     print("\n" + "=" * 55)
     print(f"Total defect records: {len(records)}")
